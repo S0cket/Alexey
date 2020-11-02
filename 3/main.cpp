@@ -37,19 +37,21 @@ public:
 	}
 
 	void add(Fraction f) {
-		this->n = this->n * f.getm() + f.getn() * this->m;
-		this->m *= f.getm();
-		int n = this->n, m = this->m;
-		if (m > n)
-			swap(n, m);
-		if (m != 0) {
-			while (n % m != 0) {
-				int b = n;
-				n = m;
-				m = b % m;
+		if (f.getn() != 0) {
+			this->n = this->n * f.getm() + f.getn() * this->m;
+			this->m *= f.getm();
+			int n = this->n, m = this->m;
+			if (m > n)
+				swap(n, m);
+			if (m != 0) {
+				while (n % m != 0) {
+					int b = n;
+					n = m;
+					m = b % m;
+				}
+				this->n /= m;
+				this->m /= m;
 			}
-			this->n /= m;
-			this->m /= m;
 		}
 	}
 };
